@@ -5,7 +5,7 @@ addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
-      - kalakris-cmake
+      - george-edison55-cmake-3.x
     packages:
       - g++-5
       - gcc-5
@@ -17,4 +17,5 @@ addons:
 #   - sudo apt-get update
 #   - sudo apt-get install -qq $CXX cmake libgtest-dev
 script:
+  - cmake --version
   - mkdir build && cd build && cmake .. && make --build . && ./moment_test
