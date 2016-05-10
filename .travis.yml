@@ -11,11 +11,8 @@ addons:
       - gcc-5
       - cmake
       - cmake-data
-# before_install:
-#   - export CXX="g++-5" CC="gcc-5"
-#   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-#   - sudo apt-get update
-#   - sudo apt-get install -qq $CXX cmake
+before_install:
+  - export CXX="g++-5" CC="gcc-5"
 script:
   - cmake --version
   - mkdir build && cd build && cmake .. && cmake --build . && ./moment_test
