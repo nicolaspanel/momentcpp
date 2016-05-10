@@ -1,17 +1,20 @@
 language: cpp
 compiler:
   - g++
-# addons:
-#   apt:
-#     sources:
-#       - ubuntu-toolchain-r-test
-#     packages:
-#       - g++-5
-#       - gcc-5
-before_install:
-  - export CXX="g++-5" CC="gcc-5"
-  - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
-  - sudo apt-get update
-  - sudo apt-get install -qq $CXX cmake libgtest-dev
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - kalakris-cmake
+    packages:
+      - g++-5
+      - gcc-5
+      - cmake
+      - libgtest-dev
+# before_install:
+#   - export CXX="g++-5" CC="gcc-5"
+#   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+#   - sudo apt-get update
+#   - sudo apt-get install -qq $CXX cmake libgtest-dev
 script:
   - mkdir build && cd build && cmake .. && make --build . && ./moment_test
