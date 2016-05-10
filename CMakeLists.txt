@@ -4,28 +4,27 @@ cmake_minimum_required (VERSION 3.2.3 FATAL_ERROR)
 # set and check compiler
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED on)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall")
 
-set(PROJECT_NAME moment)
-set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
+set(PROJECT_NAME          moment)
+set(PROJECT_TEST_NAME     ${PROJECT_NAME}_test)
+set(VERSION               "1.0.0")
 
 project (${PROJECT_NAME} C CXX)
 set(CMAKE_BUILD_TYPE Release)
 find_package(Threads REQUIRED) # required by gtest
 
-# The variables
-set(VERSION               1.0.0)
+# Set project variables
 set(SOURCES_DIR           "${PROJECT_SOURCE_DIR}/include")
 set(EXTERNAL_PROJECTS_DIR "${PROJECT_SOURCE_DIR}/external")
-file(GLOB HEADERS         ${SOURCES_DIR}/*.hpp)
-file(GLOB SOURCES         ${PROJECT_SOURCE_DIR}/src/*.cpp)
+file(GLOB HEADERS          ${SOURCES_DIR}/*.hpp)
+file(GLOB SOURCES          ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 include_directories (${SOURCES_DIR})
-#include_directories ("${PROJECT_SOURCE_DIR}/src")
 
-
-add_library(${PROJECT_NAME} SHARED ${SOURCES})
+add_library(${PROJECT_NAME}  ${SOURCES})
 add_executable (main main.cpp)
+target_compile_options(${PROJECT_NAME}  PUBLIC -std=c++14 -g -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -pedantic)
 
 #Set the location for library installation -- i.e., /usr/lib in this case
 # not really necessary in this example. Use "sudo make install" to apply
