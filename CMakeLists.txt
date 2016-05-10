@@ -17,12 +17,11 @@ find_package(Threads REQUIRED) # required by gtest
 # Set project variables
 set(SOURCES_DIR           "${PROJECT_SOURCE_DIR}/include")
 set(EXTERNAL_PROJECTS_DIR "${PROJECT_SOURCE_DIR}/external")
-file(GLOB HEADERS          ${SOURCES_DIR}/*.hpp)
-file(GLOB SOURCES          ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 include_directories (${SOURCES_DIR})
 
-add_library(${PROJECT_NAME}  ${SOURCES})
+add_library(${PROJECT_NAME}
+  src/moment.cpp)
 add_executable (main main.cpp)
 target_compile_options(${PROJECT_NAME}  PUBLIC -std=c++14 -g -Wall -Wextra -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -pedantic)
 
