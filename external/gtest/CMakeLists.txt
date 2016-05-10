@@ -1,5 +1,5 @@
 # adapted from https://github.com/snikulov/google-test-examples/blob/master/ext/gtest/CMakeLists.txt
-cmake_minimum_required(VERSION 2.8.7)
+cmake_minimum_required(VERSION 3.2.3 FATAL_ERROR)
 project(gtest_builder C CXX)
 include(ExternalProject)
 
@@ -9,8 +9,7 @@ ExternalProject_Add(googletest
              -Dgtest_force_shared_crt=ON
              -DBUILD_GTEST=ON
    PREFIX "${CMAKE_CURRENT_BINARY_DIR}"
- # Disable install step
-  INSTALL_COMMAND ""
+  INSTALL_COMMAND ""  # Disable install step
 )
 
 # Specify include dir

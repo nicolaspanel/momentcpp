@@ -1,5 +1,5 @@
 
-cmake_minimum_required (VERSION 2.8.7 FATAL_ERROR)
+cmake_minimum_required (VERSION 3.2.3 FATAL_ERROR)
 
 # set and check compiler
 set(CMAKE_CXX_STANDARD 14)
@@ -9,7 +9,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g -Wall")
 set(PROJECT_NAME moment)
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
-project (${PROJECT_NAME} CXX)
+project (${PROJECT_NAME} C CXX)
 set(CMAKE_BUILD_TYPE Release)
 find_package(Threads REQUIRED) # required by gtest
 
