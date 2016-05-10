@@ -14,4 +14,4 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install -qq $CXX
 script:
-  - make test
+  - mkdir build && cd build && cmake .. && make --build . && ./moment_test
