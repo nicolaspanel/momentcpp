@@ -1,7 +1,7 @@
 
 #include <iostream>
-#include "moment.hpp"
+#include "./include/moment.hpp"
 
 int main() {
-  std::cout << moment::moment() << std::endl;
+  std::cout << ::moment::moment() << std::endl;
 }
