@@ -10,7 +10,6 @@ addons:
       - g++-5
       - gcc-5
       - cmake
-      - libgtest-dev
 # before_install:
 #   - export CXX="g++-5" CC="gcc-5"
 #   - sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y

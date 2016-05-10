@@ -10,33 +10,39 @@ set(PROJECT_NAME moment)
 set(PROJECT_TEST_NAME ${PROJECT_NAME}_test)
 
 project (${PROJECT_NAME} CXX)
+set(CMAKE_BUILD_TYPE Release)
+find_package(Threads REQUIRED) # required by gtest
 
-# The version number.
-set (VERSION 1.0.0)
+# The variables
+set(VERSION               1.0.0)
+set(SOURCES_DIR           "${PROJECT_SOURCE_DIR}/include")
+set(EXTERNAL_PROJECTS_DIR "${PROJECT_SOURCE_DIR}/external")
+file(GLOB HEADERS         ${SOURCES_DIR}/*.hpp)
+file(GLOB SOURCES         ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
-include_directories ("${PROJECT_SOURCE_DIR}/include")
+include_directories (${SOURCES_DIR})
 #include_directories ("${PROJECT_SOURCE_DIR}/src")
-file(GLOB HEADERS ${PROJECT_SOURCE_DIR}/include/*.hpp)
-file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
-add_library(${PROJECT_NAME} "src/moment.cpp" )
+
+add_library(${PROJECT_NAME} SHARED ${SOURCES})
 add_executable (main main.cpp)
-# install(TARGETS ${PROJECT_NAME} DESTINATION "${PROJECT_SOURCE_DIR}/bin")
-# install(TARGETS main DESTINATION "${PROJECT_SOURCE_DIR}/bin")
+
+#Set the location for library installation -- i.e., /usr/lib in this case
+# not really necessary in this example. Use "sudo make install" to apply
+install(TARGETS ${PROJECT_NAME} DESTINATION /usr/lib)
 
 #---- TEST ----
+add_subdirectory(${EXTERNAL_PROJECTS_DIR}/gtest)
+
 enable_testing()
 
 file(GLOB TEST_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
 add_executable(${PROJECT_TEST_NAME} ${TEST_SRC_FILES})
+add_dependencies(${PROJECT_TEST_NAME} googletest)
 
-# link gtest
-find_package(GTest REQUIRED)
-if (GTEST_FOUND)
-  include_directories(${GTEST_INCLUDE_DIRS})
-  target_link_libraries (${PROJECT_TEST_NAME} ${GTEST_LIBRARIES})
-else ()
-  message(FATAL_ERROR "GTest required." )
-endif (GTEST_FOUND)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+target_link_libraries(${PROJECT_TEST_NAME} ${GTEST_LIBS_DIR}/libgtest.a)
+target_link_libraries(${PROJECT_TEST_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
 add_test(tests ${PROJECT_TEST_NAME})
