@@ -18,4 +18,4 @@ addons:
 #   - sudo apt-get install -qq $CXX cmake
 script:
   - cmake --version
-  - mkdir build && cd build && cmake .. && make --build . && ./moment_test
+  - mkdir build && cd build && cmake .. && cmake --build . && ./moment_test
